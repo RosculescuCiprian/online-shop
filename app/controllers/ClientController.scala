@@ -22,7 +22,7 @@ class ClientController @Inject()(repo: ClientRepository,
    */
   val personForm: Form[CreatePersonForm] = Form {
     mapping(
-      "name" -> nonEmptyText,
+      "email" -> email,
       "age" -> number.verifying(min(0), max(140))
     )(CreatePersonForm.apply)(CreatePersonForm.unapply)
   }
