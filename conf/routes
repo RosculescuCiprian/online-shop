@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.PersonController.index
+GET     /                           controllers.ClientController.index
 
 + nocsrf
-POST    /person                     controllers.PersonController.addPerson
-GET     /persons                    controllers.PersonController.getPersons
+POST    /client                     controllers.ClientController.addPerson
+GET     /clients                    controllers.ClientController.getPersons
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
