@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.PersonController.index
+
++ nocsrf
 POST    /person                     controllers.PersonController.addPerson
 GET     /persons                    controllers.PersonController.getPersons
 

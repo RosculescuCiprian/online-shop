@@ -31,7 +31,7 @@ class PersonController @Inject()(repo: PersonRepository,
    * The index action.
    */
   def index = Action { implicit request =>
-    Ok(views.html.index(personForm))
+    Ok(Json.prettyPrint(Json.obj("message" -> "Welcome to the online store")))
   }
 
   /**
@@ -46,13 +46,11 @@ class PersonController @Inject()(repo: PersonRepository,
       // We also wrap the result in a successful future, since this action is synchronous, but we're required to return
       // a future because the person creation function returns a future.
       errorForm => {
-        Future.successful(Ok(views.html.index(errorForm)))
+        Future.successful(BadRequest(errorForm.errorsAsJson))
       },
       // There were no errors in the from, so create the person.
       person => {
-        repo.create(person.name, person.age).map { _ =>
-          // If successful, we simply redirect to the index page.
-          Redirect(routes.PersonController.index).flashing("success" -> "user.created")
+        repo.create(person.name, person.age).map { person => Ok(Json.obj("id"-> person.id))
         }
       }
     )
