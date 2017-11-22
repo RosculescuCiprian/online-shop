@@ -4,7 +4,7 @@ import javax.inject.{ Inject, Singleton }
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 
-import models.Person
+import models.Client
 
 import scala.concurrent.{ Future, ExecutionContext }
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ Future, ExecutionContext }
  * @param dbConfigProvider The Play db config provider. Play will inject this for you.
  */
 @Singleton
-class PersonRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class ClientRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
   // We want the JdbcProfile for this provider
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
@@ -26,7 +26,7 @@ class PersonRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(impl
   /**
    * Here we define the table. It will have a name of people
    */
-  private class PeopleTable(tag: Tag) extends Table[Person](tag, "people") {
+  private class ClientTable(tag: Tag) extends Table[Client](tag, "people") {
 
     /** The ID column, which is the primary key, and auto incremented */
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
@@ -45,13 +45,13 @@ class PersonRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(impl
      * In this case, we are simply passing the id, name and page parameters to the Person case classes
      * apply and unapply methods.
      */
-    def * = (id, name, age) <> ((Person.apply _).tupled, Person.unapply)
+    def * = (id, name, age) <> ((Client.apply _).tupled, Client.unapply)
   }
 
   /**
    * The starting point for all queries on the people table.
    */
-  private val people = TableQuery[PeopleTable]
+  private val people = TableQuery[ClientTable]
 
   /**
    * Create a person with the given name and age.
@@ -59,14 +59,14 @@ class PersonRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(impl
    * This is an asynchronous operation, it will return a future of the created person, which can be used to obtain the
    * id for that person.
    */
-  def create(name: String, age: Int): Future[Person] = db.run {
+  def create(name: String, age: Int): Future[Client] = db.run {
     // We create a projection of just the name and age columns, since we're not inserting a value for the id column
     (people.map(p => (p.name, p.age))
       // Now define it to return the id, because we want to know what id was generated for the person
       returning people.map(_.id)
       // And we define a transformation for the returned value, which combines our original parameters with the
       // returned id
-      into ((nameAge, id) => Person(id, nameAge._1, nameAge._2))
+      into ((nameAge, id) => Client(id, nameAge._1, nameAge._2))
     // And finally, insert the person into the database
     ) += (name, age)
   }
@@ -74,7 +74,7 @@ class PersonRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(impl
   /**
    * List all the people in the database.
    */
-  def list(): Future[Seq[Person]] = db.run {
+  def list(): Future[Seq[Client]] = db.run {
     people.result
   }
 }
