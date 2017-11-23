@@ -3,6 +3,7 @@ package controllers
 import javax.inject._
 
 import models._
+import models.clients.ClientRepository
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
@@ -62,6 +63,13 @@ class ClientController @Inject()(repo: ClientRepository,
   def getPersons = Action.async { implicit request =>
     repo.list().map { people =>
       Ok(Json.toJson(people))
+    }
+  }
+
+  def getPersonById(id: Long) = Action.async { implicit request =>
+    repo.getClientById(id).map { clientOption =>
+      clientOption
+        .fold(NotFound(Json.obj("error" -> s"The client with id $id was not found")))(client => Ok(Json.toJson(client)))
     }
   }
 }

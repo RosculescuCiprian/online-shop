@@ -8,6 +8,7 @@ GET     /                           controllers.ClientController.index
 + nocsrf
 POST    /client                     controllers.ClientController.addPerson
 GET     /clients                    controllers.ClientController.getPersons
+GET     /client/:id                 controllers.ClientController.getPersonById(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,4 +1,4 @@
-package models
+package models.clients
 
 import play.api.libs.json._
 

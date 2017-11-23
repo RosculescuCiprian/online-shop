@@ -16,7 +16,7 @@ class BrowserSpec extends Specification {
 
       browser.goTo("http://localhost:" + port)
 
-      browser.pageSource must contain("Add Person")
+      browser.pageSource must contain("message")
     }
   }
 }

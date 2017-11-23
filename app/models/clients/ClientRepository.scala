@@ -1,4 +1,4 @@
-package models
+package models.clients
 
 import javax.inject.{Inject, Singleton}
 
