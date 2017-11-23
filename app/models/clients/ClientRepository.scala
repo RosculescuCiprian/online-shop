@@ -1,4 +1,4 @@
-package models
+package models.clients
 
 import javax.inject.{Inject, Singleton}
 
@@ -47,5 +47,9 @@ class ClientRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impli
     */
   def list(): Future[Seq[Client]] = db.run {
     clients.result
+  }
+
+  def getClientById(id:Long):Future[Option[Client]] = db.run {
+    clients.filter(_.id === id).result.headOption
   }
 }

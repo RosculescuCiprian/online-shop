@@ -1,6 +1,6 @@
 package tables
 
-import models.Client
+import models.clients.Client
 
 trait ClientTable {
 
