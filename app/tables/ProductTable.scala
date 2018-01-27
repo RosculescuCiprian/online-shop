@@ -17,6 +17,6 @@ trait ProductTable extends SupplierTable {
     def supplierForeignKey = foreignKey("SUP_FK", supplierId, suppliers)(_.id)
   }
 
-  protected def products: TableQuery[ProductTableRepresentation]
+  protected def products = TableQuery[ProductTableRepresentation]
 
 }

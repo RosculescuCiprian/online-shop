@@ -49,6 +49,4 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
       case Failure(e) => Left(e.getMessage)
     }
   }
-
-  override protected def products: driver.api.TableQuery[ProductTableRepresentation] = ???
 }
