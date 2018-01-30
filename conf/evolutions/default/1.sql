@@ -17,7 +17,7 @@ create table "products" (
   "name" varchar not null,
   "supplierId" bigint not null,
   "desc" int not null,
-  FOREIGN KEY ( SUP_FK ) REFERENCES suppliers( id )
+  FOREIGN KEY (SUP_FK) REFERENCES suppliers(id)
 );
 
 
