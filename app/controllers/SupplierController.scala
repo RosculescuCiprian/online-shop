@@ -37,7 +37,7 @@ class SupplierController @Inject()(repo: SupplierRepository,
   def getSupplierById(supplierId: Long) = Action.async { implicit request =>
     repo.getSupplierById(supplierId).map(optionSupplier =>
       optionSupplier.fold(NotFound(Json.obj("error" -> s"supplier with id $supplierId not found")))(supplier =>
-        Ok(Json.obj("supplierId" -> supplier.id))))
+        Ok(Json.toJson(supplier))))
   }
 
 }
