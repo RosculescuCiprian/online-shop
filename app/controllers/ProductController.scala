@@ -10,7 +10,8 @@ import play.api.mvc.{MessagesAbstractController, MessagesControllerComponents}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class ProductController @Inject()(repo: ProductRepository, cc: MessagesControllerComponents)
+class ProductController @Inject()(repo: ProductRepository,
+                                  cc: MessagesControllerComponents)
                                  (implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
 
   val productForm: Form[CreateProductForm] = Form {
@@ -33,14 +34,14 @@ class ProductController @Inject()(repo: ProductRepository, cc: MessagesControlle
     )
   }
 
-  def getProductById(id: Long) = Action.async {
-    repo.getProductById(id).map(_ match {
+  def getProductById(productId: Long) = Action.async {
+    repo.getProductById(productId).map(_ match {
       case Right(productOption) => productOption.fold(NotFound(Json.obj("id" -> 0)))(product => Ok(Json.toJson(product)))
       case Left(databaseErrorMessage) => BadRequest(Json.obj("error" -> databaseErrorMessage))
     })
   }
 
-  def getProductBySupplierId(supplierId: Long) = Action.async {
+  def getProductsBySupplierId(supplierId: Long) = Action.async {
     repo.getProductForSupplier(supplierId) map {
       _ match {
         case Right(products) => Ok(Json.toJson(products))

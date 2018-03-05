@@ -19,6 +19,7 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
   import dbConfig.profile.api._
 
   def createProduct(name: String, supplierId: Long, desc: String): Future[Either[String, Product]] = db.run {
+
     val creationQuery = (products.map(product => (product.name, product.supplierId, product.desc))
       returning products.map(_.id)
       into ((productTuple, productId) => Product(productId, productTuple._1, productTuple._2, productTuple._3))
