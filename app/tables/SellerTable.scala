@@ -16,5 +16,5 @@ trait SellerTable {
     def * = (id, name, desc) <> ((Seller.apply _).tupled, Seller.unapply)
   }
 
-
+  protected val sellersContainer = TableQuery[Sellers]
 }
