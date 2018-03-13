@@ -24,14 +24,15 @@ POST    /sellers                               controllers.SellerController.crea
 GET     /sellers/all                           controllers.SellerController.getSellers
 GET     /sellers/:id                           controllers.SellerController.getSellerById(id: Long)
 
-+ nocsrf
-POST    /catalogues/seller/:sellerId           controllers.CatalogueController.createCatalogueForSupplier(sellerId: Long)
-PUT     /catalogues/seller/:sellerId           controllers.CatalogueController.addProductsToCatalogue(sellerId: Long)
-PATCH   /catalogues/:cid/product/:pid          controllers.CatalogueController.updateProductCatalogue(cid: Long, pid: Long)
-GET     /catalogues/seller/:sellerId           controllers.CatalogueController.getCataloguesForSupplier(sellerId: Long)
-GET     /catalogues/:cid                       controllers.CatalogueController.getCatalogue(cid: Long)
-GET     /catalogues/product/:productId         controllers.CatalogueController.getCatalogueProduct(productId: Long)
+#+ nocsrf
+#POST    /catalogues/seller/:sellerId           controllers.CatalogueController.createCatalogueForSupplier(sellerId: Long)
+#PUT     /catalogues/:cid                       controllers.CatalogueController.addProductsToCatalogue(cid: Long)
+#PATCH   /catalogues/:cid/product/:pid          controllers.CatalogueController.updateProductCatalogue(cid: Long, pid: Long)
+#GET     /catalogues/s1ller/:sellerId           controllers.CatalogueController.getCataloguesForSupplier(sellerId: Long)
+#GET     /catalogues/:cid                       controllers.CatalogueController.getCatalogue(cid: Long)
+#GET     /catalogues/product/:productId         controllers.CatalogueController.getCatalogueProduct(productId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+

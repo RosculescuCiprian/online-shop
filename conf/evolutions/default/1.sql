@@ -31,7 +31,7 @@ create table "catalogue_items" (
    "sellerId" bigint not null,
    "productId" bigint not null,
    "price" bigint not null,
-   "desc" varchar
+   "desc" varchar,
    FOREIGN KEY("sellerId") REFERENCES "sellers"("id"),
    FOREIGN KEY("productId") REFERENCES "products"("id")
 )
