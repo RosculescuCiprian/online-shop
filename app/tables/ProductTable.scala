@@ -14,7 +14,7 @@ trait ProductTable extends SupplierTable {
     def desc = column[String]("desc")
 
     def * = (id,name, supplierId, desc) <> ((Product.apply _).tupled, Product.unapply)
-    def supplierForeignKey = foreignKey("SUP_FK", supplierId, suppliers)(_.id)
+    def supplierForeignKey = foreignKey("supplierId", supplierId, suppliers)(_.id)
   }
 
   protected def products = TableQuery[ProductTableRepresentation]
