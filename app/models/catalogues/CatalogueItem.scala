@@ -2,7 +2,7 @@ package models.catalogues
 
 import play.api.libs.json.{Json, OFormat}
 
-case class CatalogueItem(id: Long, productId: Long, price: Long, desc: String) {
+case class CatalogueItem(id: Long, catalogueId: Long, productId: Long, price: Long, desc: String) {
   def patch(productId: Option[Long], price: Option[Long], desc: Option[String]): CatalogueItem = {
     this.copy(
       productId = productId.getOrElse(this.productId),
