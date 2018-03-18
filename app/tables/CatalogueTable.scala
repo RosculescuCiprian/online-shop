@@ -1,25 +1,22 @@
 package tables
 
-import models.catalogues.CatalogueItem
+import models.catalogues.Catalogue
 
-trait CatalogueTable extends ProductTable with SellerTable {
+trait CatalogueTable extends SellerTable {
 
-  this: SlickRepository =>
+  this:SlickRepository =>
 
   import driver.api._
 
-  protected class CatalogueItemRepresentation(tag: Tag) extends Table[CatalogueItem](tag, "catalogue_items") {
+  protected class CatalogueTableRepresentation(tag: Tag) extends Table[Catalogue](tag, "catalogues") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
     def sellerId = column[Long]("sellerId")
-    def productId = column[Long]("productId")
-    def price = column[Long]("price")
-    def desc = column[String]("desc")
 
     def sellerForeignKey = foreignKey("SELLER_FK", sellerId, sellersContainer)(_.id)
-    def productForeignKey = foreignKey("PRODUCT_FK", productId, products)(_.id)
 
-    def * = (id, sellerId, productId, price, desc) <> ((CatalogueItem.apply _).tupled, CatalogueItem.unapply)
+    def * = (id, sellerId) <> ((Catalogue.apply _).tupled, Catalogue.unapply)
   }
 
-  protected def catalogueItems = TableQuery[CatalogueItemRepresentation]
+  def cataloguesQueryManager = TableQuery[CatalogueTableRepresentation]
+
 }

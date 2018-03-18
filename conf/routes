@@ -3,34 +3,34 @@
 # ~~~~
 
 # Home page
-GET     /                                      controllers.ClientController.index
+GET     /                                       controllers.ClientController.index
 
 + nocsrf
-POST    /clients                               controllers.ClientController.createClient
-GET     /clients                               controllers.ClientController.getClients
-GET     /clients/:id                           controllers.ClientController.getClientById(id: Long)
+POST    /clients                                controllers.ClientController.createClient
+GET     /clients                                controllers.ClientController.getClients
+GET     /clients/:id                            controllers.ClientController.getClientById(id: Long)
 
 + nocsrf
-POST    /suppliers                             controllers.SupplierController.createSupplier
-GET     /suppliers                             controllers.SupplierController.getSuppliers
-GET     /suppliers/:supplierId                 controllers.SupplierController.getSupplierById(supplierId: Long)
+POST    /suppliers                              controllers.SupplierController.createSupplier
+GET     /suppliers                              controllers.SupplierController.getSuppliers
+GET     /suppliers/:supplierId                  controllers.SupplierController.getSupplierById(supplierId: Long)
 
 + nocsrf
-POST    /products                              controllers.ProductController.createProduct
-GET     /products/:productId                   controllers.ProductController.getProductById(productId: Long)
+POST    /products                               controllers.ProductController.createProduct
+GET     /products/:productId                    controllers.ProductController.getProductById(productId: Long)
 
 + nocsrf
-POST    /sellers                               controllers.SellerController.createSeller
-GET     /sellers/all                           controllers.SellerController.getSellers
-GET     /sellers/:id                           controllers.SellerController.getSellerById(id: Long)
+POST    /sellers                                controllers.SellerController.createSeller
+GET     /sellers/all                            controllers.SellerController.getSellers
+GET     /sellers/:id                            controllers.SellerController.getSellerById(id: Long)
 
-#+ nocsrf
-#POST    /catalogues/seller/:sellerId           controllers.CatalogueController.createCatalogueForSupplier(sellerId: Long)
-#PUT     /catalogues/:cid                       controllers.CatalogueController.addProductsToCatalogue(cid: Long)
-#PATCH   /catalogues/:cid/product/:pid          controllers.CatalogueController.updateProductCatalogue(cid: Long, pid: Long)
-#GET     /catalogues/s1ller/:sellerId           controllers.CatalogueController.getCataloguesForSupplier(sellerId: Long)
-#GET     /catalogues/:cid                       controllers.CatalogueController.getCatalogue(cid: Long)
-#GET     /catalogues/product/:productId         controllers.CatalogueController.getCatalogueProduct(productId: Long)
++ nocsrf
+POST    /catalogues/                                                      controllers.CatalogueController.createCatalogue
+#PUT     /catalogues/seller/sellerId/catalogue/:cid                       controllers.CatalogueController.addProductsToCatalogue(cid: Long)
+#PATCH   /catalogues/:cid/product/:pid                                    controllers.CatalogueController.updateProductCatalogue(cid: Long, pid: Long)
+GET     /catalogues/seller/:sellerId                                      controllers.CatalogueController.getCatalogueBySellerId(sellerId: Long)
+GET     /catalogues/:cid                                                  controllers.CatalogueController.getCatalogue(cid: Long)
+GET     /catalogues/product/:productId                                    controllers.CatalogueController.getCataloguesWithProduct(productId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
